@@ -16,7 +16,9 @@ public class Obra {
         this.cantidadIngenieros = cantidadIngenieros;
     }
 
-
+    public Obra(String nombre) {
+        this.nombre = nombre;
+    }
     //get y set
 
 
@@ -52,6 +54,16 @@ public class Obra {
         this.cantidadIngenieros = cantidadIngenieros;
     }
 
+    @Override
+    public String toString() {
+        return "Obra{" +
+                "nombre='" + nombre + '\'' +
+                ", recursosObra=" + recursosObra +
+                ", cantidadObreros=" + cantidadObreros +
+                ", cantidadIngenieros=" + cantidadIngenieros +
+                '}';
+    }
+
     public void agregarMaterial() {
         String nombreMaterial = JOptionPane.showInputDialog("Ingrese el nombre del material");
         int cantidadMaterial = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad"));
@@ -71,6 +83,7 @@ public class Obra {
     public void asignarPersonal() {
         this.cantidadObreros = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de obreros que se va a necesitar"));
         this.cantidadIngenieros = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de ingenieros"));
+
     }
 }
 
