@@ -4,16 +4,13 @@ public class Obra {
     //Atributos
     private String nombre;
     private LinkedList<Recursos> recursosObra = new LinkedList<Recursos>();
-    private int cantidadObreros;
-    private int cantidadIngenieros;
+
 
     //Constructor
 
-    public Obra(String nombre, LinkedList<Recursos> recursosObra, int cantidadObreros, int cantidadIngenieros) {
+    public Obra(String nombre, LinkedList<Recursos> recursosObra) {
         this.nombre = nombre;
         this.recursosObra = recursosObra;
-        this.cantidadObreros = cantidadObreros;
-        this.cantidadIngenieros = cantidadIngenieros;
     }
 
     public Obra(String nombre) {
@@ -38,29 +35,13 @@ public class Obra {
         this.recursosObra = recursosObra;
     }
 
-    public int getCantidadObreros() {
-        return cantidadObreros;
-    }
 
-    public void setCantidadObreros(int cantidadObreros) {
-        this.cantidadObreros = cantidadObreros;
-    }
-
-    public int getCantidadIngenieros() {
-        return cantidadIngenieros;
-    }
-
-    public void setCantidadIngenieros(int cantidadIngenieros) {
-        this.cantidadIngenieros = cantidadIngenieros;
-    }
 
     @Override
     public String toString() {
         return "Obra{" +
                 "nombre='" + nombre + '\'' +
                 ", recursosObra=" + recursosObra +
-                ", cantidadObreros=" + cantidadObreros +
-                ", cantidadIngenieros=" + cantidadIngenieros +
                 '}';
     }
 
@@ -80,11 +61,25 @@ public class Obra {
         recursosObra.add(nuevo);
     }
 
-    public void asignarPersonal() {
-        this.cantidadObreros = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de obreros que se va a necesitar"));
-        this.cantidadIngenieros = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de ingenieros"));
+    public void asignarPersonal(Ingeniero ingeniero,Obrero obrero) {
+        obrero.setCantidadObreros(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de obreros que se va a necesitar")));
+        ingeniero.setCantidadIng(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de ingenieros")));
 
     }
+    public void mostrarMateriales() {
+        if (recursosObra.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay materiales");
+            return;
+        }
+
+        String mensaje = "Lista de materiales:\n";
+        for (Recursos recurso : recursosObra) {
+            mensaje += "Nombre: " + recurso.getNombre() + ", Cantidad: " + recurso.getCantidad() + ", Precio por unidad: $" + recurso.getPrecio() + "\n";
+        }
+
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+
 }
 
 
