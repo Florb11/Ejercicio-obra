@@ -1,44 +1,35 @@
 import javax.swing.*;
-import java.util.LinkedList;
-
 public class Presupuesto {
-    //Atributos
-    private LinkedList<Recursos> recursosObra = new LinkedList<Recursos>();
-
+    private Obra obra;
     //Constructor
-
-
-    public Presupuesto(LinkedList<Recursos> recursosObra) {
-        this.recursosObra = recursosObra;
+    public Presupuesto(Obra obra) {
+        this.obra = obra;
     }
-    // Get y set
-
-    public LinkedList<Recursos> getrecursosObra() {
-        return recursosObra;
+    //get y sett
+    public Obra getObra() {
+        return obra;
     }
 
-    public void setrecursosObra(LinkedList<Recursos> recursosObra) {
-        this.recursosObra = recursosObra;
+    public void setObra(Obra obra) {
+        this.obra = obra;
     }
 
-    @Override
-    public String toString() {
-        return "Presupuesto{" +
-                "recursosObra=" + recursosObra +
-                '}';
-    }
     public void calcularCostoObra(Ingeniero ingeniero, Obrero obrero){
-        double costoMateriales = 0;
-        double salarioIng = ingeniero.getSalario() * ingeniero.getCantidadIng();
-        double salarioObreros = obrero.getSalario() * obrero.getCantidadObreros();
-        double manoDeobra= salarioObreros + salarioIng;
-        for (Recursos recurso : recursosObra) {
-            costoMateriales += recurso.getCantidad() * recurso.getPrecio();
+        if(this.obra != null) {
+            double costoMateriales = 0;
+            double salarioIng = ingeniero.getSalario() * ingeniero.getCantidadIng();
+            double salarioObreros = obrero.getSalario() * obrero.getCantidadObreros();
+            double manoDeobra = salarioObreros + salarioIng;
+            for (Recursos recurso : this.obra.getRecursosObra()) {
+                costoMateriales += recurso.getCantidad() * recurso.getPrecio();
+            }
+            double costoTotalObra = manoDeobra + costoMateriales;
+            JOptionPane.showMessageDialog(null, "Costo total de la obra: $" + costoTotalObra);
+            JOptionPane.showMessageDialog(null, "Costo de mano de obra: $" + manoDeobra);
+            JOptionPane.showMessageDialog(null, "Costo de materiales: $" + costoMateriales);
+        }else{
+            JOptionPane.showMessageDialog(null,"No hay obra en marcha");
         }
-        double costoTotalObra = manoDeobra + costoMateriales;
-        JOptionPane.showMessageDialog(null, "Costo total de la obra: $" + costoTotalObra);
-        JOptionPane.showMessageDialog(null, "Costo de mano de obra: $" + manoDeobra);
-        JOptionPane.showMessageDialog(null, "Costo de materiales: $" + costoMateriales);
 
     }
 }
